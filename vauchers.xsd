@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/vauchers"
+	xmlns:tns="http://www.example.org/vauchers" elementFormDefault="qualified">
+	<element name="vauchers">
+		<complexType>
+			<sequence>
+				<element name="vaucher" maxOccurs="unbounded">
+					<complexType>
+						<sequence>
+							<element name="type" type="string" />
+							<element name="country" type="string" />
+							<element name="days">
+								<complexType>
+									<simpleContent>
+										<extension base="int">
+											<attribute name="nights" default="0">
+												<simpleType>
+													<restriction base="byte">
+														<minInclusive value="-1" />
+														<maxInclusive value="1" />
+													</restriction>
+												</simpleType>
+											</attribute>
+										</extension>
+									</simpleContent>
+								</complexType>
+							</element>
+							<element name="transport">
+								<simpleType>
+									<restriction base="string">
+										<enumeration value="AVIA" />
+										<enumeration value="RAILWAY" />
+										<enumeration value="AUTO" />
+										<enumeration value="SHIP" />
+									</restriction>
+								</simpleType>
+							</element>
+							<element name="cost" type="positiveInteger" />
+							<element name="hotel-characteristics">
+								<complexType>
+									<sequence>
+										<element name="stars" minOccurs="0">
+											<simpleType>
+												<restriction base="byte">
+													<minInclusive value="1" />
+													<maxInclusive value="5" />
+												</restriction>
+											</simpleType>
+										</element>
+										<element name="tv" type="boolean" />
+										<element name="food" minOccurs="0">
+											<simpleType>
+												<restriction base="string">
+													<enumeration value="HB" />
+													<enumeration value="BB" />
+													<enumeration value="AI" />
+												</restriction>
+											</simpleType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+						<attribute name="id" type="string" use="required" />
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>
