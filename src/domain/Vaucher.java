@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 public class Vaucher {
     private String identity;
     private String type;
@@ -8,7 +11,7 @@ public class Vaucher {
     private Integer deltaNights;
     private TransportType transportType;
     private Long cost;
-    private HotelCharacteristic hotelCharacteristic;
+    private Set<HotelCharacteristic> characteristics = new LinkedHashSet<HotelCharacteristic>();
 
     public String getIdentity() {
         return identity;
@@ -66,12 +69,8 @@ public class Vaucher {
         this.cost = cost;
     }
 
-    public HotelCharacteristic getHotelCharacteristic() {
-        return hotelCharacteristic;
-    }
-
-    public void setHotelCharacteristic(HotelCharacteristic hotelCharacteristic) {
-        this.hotelCharacteristic = hotelCharacteristic;
+    public Set<HotelCharacteristic> getCharacteristics() {
+        return characteristics;
     }
 
     @Override
@@ -83,9 +82,9 @@ public class Vaucher {
         builder.append("Количество дней/ночей: ").append(getDays()).append('/').append(getDays() + getDeltaNights()).append('\n');
         builder.append("Транспорт: ").append(getTransportType().getName()).append('\n');
         builder.append("Характеристика отеля\n");
-        builder.append("\tКоличество звёзд: ").append(getHotelCharacteristic().getStarsCount()).append('\n');
-        builder.append("\tЕсть ли телевизор: ").append(getHotelCharacteristic().isTV()).append('\n');
-        builder.append("\tПитание: ").append(getHotelCharacteristic().getFood()).append('\n');
+        for (HotelCharacteristic characteristic : getCharacteristics()) {
+            builder.append('\t').append(characteristic.getName()).append(": ").append(characteristic.getValue()).append('\n');
+        }
         builder.append("Стоимость: ").append(getCost()).append('\n');
         return builder.toString();
     }

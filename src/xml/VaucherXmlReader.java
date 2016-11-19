@@ -10,8 +10,9 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import domain.FoodType;
-import domain.HotelCharacteristic;
+import domain.Food;
+import domain.IsTV;
+import domain.StarsCount;
 import domain.TransportType;
 import domain.Vaucher;
 
@@ -43,14 +44,21 @@ public class VaucherXmlReader {
                         vaucher.setTransportType(TransportType.valueOf(reader.getElementText()));
                     } else if ("cost".equals(tagName)) {
                         vaucher.setCost(Long.parseLong(reader.getElementText()));
-                    } else if ("hotel-characteristics".equals(tagName)) {
-                        vaucher.setHotelCharacteristic(new HotelCharacteristic());
                     } else if ("stars".equals(tagName)) {
-                        vaucher.getHotelCharacteristic().setStarsCount(Integer.parseInt(reader.getElementText()));
+                        StarsCount stars = new StarsCount();
+                        stars.setElement(tagName);
+                        stars.setValue(reader.getElementText());
+                        vaucher.getCharacteristics().add(stars);
                     } else if ("tv".equals(tagName)) {
-                        vaucher.getHotelCharacteristic().setTV(Boolean.parseBoolean(reader.getElementText()));
+                        IsTV tv = new IsTV();
+                        tv.setElement(tagName);
+                        tv.setValue(reader.getElementText());
+                        vaucher.getCharacteristics().add(tv);
                     } else if ("food".equals(tagName)) {
-                        vaucher.getHotelCharacteristic().setFood(FoodType.valueOf(reader.getElementText()));
+                        Food food = new Food();
+                        food.setElement(tagName);
+                        food.setValue(reader.getElementText());
+                        vaucher.getCharacteristics().add(food);
                     }
                     break;
                 }

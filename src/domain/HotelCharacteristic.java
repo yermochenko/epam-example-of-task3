@@ -1,31 +1,41 @@
 package domain;
 
-public class HotelCharacteristic {
-    private Integer starsCount;
-    private FoodType food;
-    private boolean TV;
+public abstract class HotelCharacteristic {
+    private String name;
+    private String element;
 
-    public Integer getStarsCount() {
-        return starsCount;
+    public HotelCharacteristic(String name) {
+        this.name = name;
     }
 
-    public void setStarsCount(Integer starsCount) {
-        this.starsCount = starsCount;
+    public String getName() {
+        return name;
     }
 
-    public FoodType getFood() {
-        return food;
+    public String getElement() {
+        return element;
     }
 
-    public void setFood(FoodType food) {
-        this.food = food;
+    public void setElement(String element) {
+        this.element = element;
     }
 
-    public boolean isTV() {
-        return TV;
+    public abstract void setValue(String value);
+
+    public abstract String getValue();
+
+    @Override
+    public String toString() {
+        return getValue();
     }
 
-    public void setTV(boolean tV) {
-        TV = tV;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj != null && getClass() == obj.getClass();
     }
 }

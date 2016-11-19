@@ -8,6 +8,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import domain.HotelCharacteristic;
 import domain.Vaucher;
 
 public class VaucherXmlWriter {
@@ -41,17 +42,9 @@ public class VaucherXmlWriter {
                 writer.writeCharacters(vaucher.getCost().toString());
                 writer.writeEndElement();
                 writer.writeStartElement("hotel-characteristics");
-                if(vaucher.getHotelCharacteristic().getStarsCount() != null) {
-                    writer.writeStartElement("stars");
-                    writer.writeCharacters(vaucher.getHotelCharacteristic().getStarsCount().toString());
-                    writer.writeEndElement();
-                }
-                writer.writeStartElement("tv");
-                writer.writeCharacters(Boolean.toString(vaucher.getHotelCharacteristic().isTV()));
-                writer.writeEndElement();
-                if(vaucher.getHotelCharacteristic().getFood() != null) {
-                    writer.writeStartElement("food");
-                    writer.writeCharacters(vaucher.getHotelCharacteristic().getFood().toString());
+                for (HotelCharacteristic hotel : vaucher.getCharacteristics()) {
+                    writer.writeStartElement(hotel.getElement());
+                    writer.writeCharacters(hotel.getValue());
                     writer.writeEndElement();
                 }
                 writer.writeEndElement();
