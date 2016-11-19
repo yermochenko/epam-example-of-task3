@@ -1,6 +1,7 @@
 package xml;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,9 @@ public class Runner {
             Random random = new Random();
             for (Vaucher vaucher : vauchers) {
                 vaucher.setCost((long) (vaucher.getCost() * (1 + random.nextInt(100)/100.0)));
+            }
+            Collections.sort(vauchers);
+            for (Vaucher vaucher : vauchers) {
                 System.out.println(vaucher);
             }
             VaucherXmlWriter writer = new VaucherXmlWriter();
