@@ -3,7 +3,7 @@ package domain;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Vaucher implements Comparable<Vaucher> {
+public class Vaucher /*implements Comparable<Vaucher>*/ {
     private String identity;
     private String type;
     private String country;
@@ -89,8 +89,8 @@ public class Vaucher implements Comparable<Vaucher> {
         return builder.toString();
     }
 
-    @Override
-    public int compareTo(Vaucher vaucher) {
-        return getCost().compareTo(vaucher.getCost());
-    }
+//    @Override
+//    public int compareTo(Vaucher vaucher) {
+//        return getCost().compareTo(vaucher.getCost());
+//    }
 }
